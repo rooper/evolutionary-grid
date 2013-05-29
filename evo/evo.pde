@@ -1,3 +1,4 @@
+
 //the grid
 Cell[][] grid;
 
@@ -57,20 +58,25 @@ class Cell {
     
     //calculate new health
     float total_neaby_fill = top.health + right.health + left.health + bottom.health;
-    health = random(total_neaby_fill);
+    health = random(total_neaby_fill/2);
     if (health != 0) {
      // health += random(-0.5,0.5);
     }
+    
     //random mutator
     //if (random(100) >= 99) {
     //  health = 100+random(-20,20);
     //}
     
     //life additions
+    
+    //old click detection  
     if (mousePressed == true) {
-       if(mouseX <= x+w && mouseX > x && mouseY <= y+h && mouseY > y) {
-         health = 150;
-       }
+      
+      if(mouseX <= x+w && mouseX > x && mouseY <= y+h && mouseY > y) {
+         health = 250;
+      }
+
     }
     
     //health decay
@@ -78,6 +84,10 @@ class Cell {
        health -= decay;
     }
     
+    //we REALLY don't want this value to go above 255...
+    if (health >= 255) {
+       health = 250;
+    }
     fill(health);
     rect(x,y,w,h);
      
@@ -87,6 +97,11 @@ class Cell {
     fill(health);
     rect(x,y,w,h); 
      
+  }
+  
+  void mousePressed() {
+    alert("pressed...");
+      
   }
   
 }
